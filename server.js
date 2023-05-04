@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
-const accountSid = 'AC8ac870db979e2c680690a5d3bda3dd11';
-const authToken = 'e7453da6f298b315f9c3c7ce3b51d714';
+const accountSid = 'replace with your own';
+const authToken = 'replace with your own';
 const client = require('twilio')(accountSid, authToken);
 const XLSX = require('xlsx');
 
@@ -27,8 +27,8 @@ const neighborhoods = [
 
 let reports = [
   { id: 1, neighborhoodId: 1, description: 'Overflowing garbage can.', isResolved: false },
-  { id: 2, neighborhoodId: 2, description: 'Pile of trash on the sidewalk on Elm St.', isResolved: false },
-  { id: 3, neighborhoodId: 3, description: 'Abandoned couch on the corner of 5th St. and Maple Ave.', isResolved: true }
+  { id: 2, neighborhoodId: 2, description: 'Pile of trash on the sidewalk at Uptown St.', isResolved: false },
+  { id: 3, neighborhoodId: 3, description: 'Abandoned couch on the corner of Midtown St.', isResolved: true }
 ];
 
 app.get('/', (req, res) => {
@@ -69,7 +69,7 @@ async function message(desc,id,resolve) {
         if (dict.NID == id) {
             client.messages.create({
                 body: `Hello ${dict.Name}! This is a message from the neighbourhood trash watch: ${desc} ${resolve}`,
-                from: '+16073501278',
+                from: '+16206590869',
                 to: dict.Number})
             .then(message => console.log(message.sid));
         }
